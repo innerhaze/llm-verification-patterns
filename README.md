@@ -22,7 +22,14 @@ A threshold is a dial on the same unreliable number. It does not add an independ
 
 ## The three-layer contract
 
-What works instead is a contract with three layers that each produce an independent signal, and a write only lands when the three agree.
+The pattern this write-up describes is a contract with three layers that
+each produce an independent signal, and a write only lands when the three
+agree. The shape of the contract is a composition of patterns that circulate
+in the LLM-as-judge literature — reviewer, deterministic cross-check,
+sampling eval — rather than something I claim to have invented. What I did
+was implement it as the governing rule of a production write path, and
+tune the sampling-audit threshold against measured concordance rather than
+guesswork.
 
 **Layer 1 — Reviewer.** The language model reads the record and returns a verdict with reasoning. This is the layer that handles judgement and natural language and nuance. It is allowed to be variable, because the two layers below decide whether to trust any given verdict.
 
